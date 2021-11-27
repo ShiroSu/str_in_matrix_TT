@@ -7,12 +7,7 @@ const matrix_row = inp=> {
     let mat = [[]]
     let size = Math.sqrt(inp.length)
     for (let i = 0; i < size; i++) {
-        let row = []
-        for (let j = 0; j < size; j++) 
-            row[j] = inp[i*size + j]
-        mat[i] = row
-    }
-    for (let i = 0; i < size; i++) {
+        mat[i] = Array.from(inp.slice(i*size, (i+1)*size))
         let row = ""
         for (let j = 0; j < size; j++) {
             const end = (j==size-1) ? '\n' : ', '
@@ -22,7 +17,17 @@ const matrix_row = inp=> {
     }
     return mat
 }
-    
+
+const init = (inp, mat)=> {
+    let init_cells = []
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            if (inp[0] === mat[i][j])
+            init_cells.push({ "first_element": mat[i][j], "i": i, "j": j })
+        }
+    }
+    return init_cells
+}
 
 const user_string = (inp, mat)=> {
     const size = mat[0].length
